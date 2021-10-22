@@ -1,0 +1,41 @@
+version: '3.1'
+
+services:
+  postgres:
+    image: postgres
+    container_name: "postgres"
+    environment:
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: qwerty
+      POSTGRES_DB: test
+      PGDATA: /data/postgres
+    volumes:
+      - pg_data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+    restart: always
+
+  redis:
+    image: redis
+    container_name: "redis"
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    ports:
+      - "6379:6379"
+
+  mongodb:
+    image: mongo:latest
+    container_name: "mongodb"
+    environment:
+      - MONGO_DATA_DIR=/mongodb/data/db
+      - MONGO_LOG_DIR=/mongodb/dev/null
+      - MONGODB_USER="user"
+      - MONGODB_PASS="pass"
+    volumes:
+      - ./mongodb/data/db:/data/db
+    ports:
+      - 27017:27017
+
+volumes:
+  pg_data:

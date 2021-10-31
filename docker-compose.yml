@@ -5,15 +5,26 @@ services:
     image: postgres
     container_name: "postgres"
     environment:
-      POSTGRES_PORT: 5432
       POSTGRES_USER: user
       POSTGRES_PASSWORD: qwerty
-      POSTGRES_DB: test
+      POSTGRES_DB: deewave
       PGDATA: /data/postgres
     volumes:
       - pg_data:/var/lib/postgresql/data/
     ports:
       - "5432:5432"
+    restart: always
+
+  postgres_test:
+    image: postgres
+    container_name: "postgres_test"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: qwerty
+      POSTGRES_DB: deewave_test
+      PGDATA: /data/postgres
+    ports:
+      - "5433:5432"
     restart: always
 
   redis:

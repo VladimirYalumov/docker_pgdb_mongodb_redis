@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="97c2a717-246e-4c76-ad0a-b43c7dfc661f" name="Changes" comment="" />
+    <list default="true" id="97c2a717-246e-4c76-ad0a-b43c7dfc661f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mongodb/data/db/WiredTiger.turtle" beforeDir="false" afterPath="$PROJECT_DIR$/mongodb/data/db/WiredTiger.turtle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mongodb/data/db/WiredTiger.wt" beforeDir="false" afterPath="$PROJECT_DIR$/mongodb/data/db/WiredTiger.wt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mongodb/data/db/WiredTigerHS.wt" beforeDir="false" afterPath="$PROJECT_DIR$/mongodb/data/db/WiredTigerHS.wt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mongodb/data/db/_mdb_catalog.wt" beforeDir="false" afterPath="$PROJECT_DIR$/mongodb/data/db/_mdb_catalog.wt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mongodb/data/db/collection-0--7408979502940269173.wt" beforeDir="false" afterPath="$PROJECT_DIR$/mongodb/data/db/collection-0--7408979502940269173.wt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mongodb/data/db/collection-2--7408979502940269173.wt" beforeDir="false" afterPath="$PROJECT_DIR$/mongodb/data/db/collection-2--7408979502940269173.wt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mongodb/data/db/collection-4--7408979502940269173.wt" beforeDir="false" afterPath="$PROJECT_DIR$/mongodb/data/db/collection-4--7408979502940269173.wt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mongodb/data/db/index-1--7408979502940269173.wt" beforeDir="false" afterPath="$PROJECT_DIR$/mongodb/data/db/index-1--7408979502940269173.wt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mongodb/data/db/index-3--7408979502940269173.wt" beforeDir="false" afterPath="$PROJECT_DIR$/mongodb/data/db/index-3--7408979502940269173.wt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mongodb/data/db/index-5--7408979502940269173.wt" beforeDir="false" afterPath="$PROJECT_DIR$/mongodb/data/db/index-5--7408979502940269173.wt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mongodb/data/db/index-6--7408979502940269173.wt" beforeDir="false" afterPath="$PROJECT_DIR$/mongodb/data/db/index-6--7408979502940269173.wt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mongodb/data/db/mongod.lock" beforeDir="false" afterPath="$PROJECT_DIR$/mongodb/data/db/mongod.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mongodb/data/db/sizeStorer.wt" beforeDir="false" afterPath="$PROJECT_DIR$/mongodb/data/db/sizeStorer.wt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postgres-data/pg_data" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,6 +27,9 @@
   <component name="ComposerSettings">
     <execution />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
       <filtered-out-file-type name="LOCAL_BRANCH" />
@@ -17,6 +37,9 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/docker-compose.yml" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1yXBtzTbVKJyQ8odq6nzZe20qtV" />
   <component name="ProjectViewState">
@@ -27,7 +50,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/workPHP/projects/og" />
+    <property name="last_opened_file_path" value="$USER_HOME$/workPHP/devenv" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -41,10 +64,27 @@
       <updated>1632388270729</updated>
       <workItem from="1632388271927" duration="693000" />
       <workItem from="1632388980672" duration="2341000" />
+      <workItem from="1635175231171" duration="3000" />
+      <workItem from="1635505857950" duration="3182000" />
+      <workItem from="1635770208619" duration="1411000" />
+      <workItem from="1635837400442" duration="1382000" />
+      <workItem from="1635840073924" duration="3883000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

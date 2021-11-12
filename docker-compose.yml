@@ -4,25 +4,26 @@ services:
   postgres:
     image: postgres
     container_name: "postgres"
+    restart: always
     environment:
+      POSTGRES_PORT: 5432
       POSTGRES_USER: user
       POSTGRES_PASSWORD: qwerty
       POSTGRES_DB: deewave
-      PGDATA: /data/postgres
+      PGDATA: /var/postgres_data
     volumes:
-      - pg_data:/var/lib/postgresql/data/
+      - postgres_data:/var/postgres_data
     ports:
       - "5432:5432"
-    restart: always
 
   postgres_test:
     image: postgres
     container_name: "postgres_test"
     environment:
+      POSTGRES_PORT: 5432
       POSTGRES_USER: user
       POSTGRES_PASSWORD: qwerty
-      POSTGRES_DB: deewave_test
-      PGDATA: /data/postgres
+      POSTGRES_DB: test
     ports:
       - "5433:5432"
     restart: always
@@ -34,6 +35,14 @@ services:
       - ./redis.conf:/usr/local/etc/redis/redis.conf
     ports:
       - "6379:6379"
+
+  redis_test:
+    image: redis
+    container_name: "redis_test"
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    ports:
+      - "6378:6379"
 
   mongodb:
     image: mongo:latest
@@ -49,4 +58,4 @@ services:
       - 27017:27017
 
 volumes:
-  pg_data:
+  postgres_data:

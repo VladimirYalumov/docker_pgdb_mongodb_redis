@@ -1,4 +1,4 @@
-version: '3.1'
+version: '3.7'
 
 services:
   postgres:
@@ -34,7 +34,7 @@ services:
     volumes:
       - ./redis.conf:/usr/local/etc/redis/redis.conf
     ports:
-      - "6379:6379"
+      - "6377:6379"
 
   redis_test:
     image: redis
@@ -48,14 +48,25 @@ services:
     image: mongo:latest
     container_name: "mongodb"
     environment:
-      - MONGO_DATA_DIR=/mongodb/data/db
-      - MONGO_LOG_DIR=/mongodb/dev/null
-      - MONGODB_USER="user"
-      - MONGODB_PASS="pass"
-    volumes:
-      - ./mongodb/data/db:/data/db
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
     ports:
       - 27017:27017
+    volumes:
+      - mongodb_data_container:/data/db
+
+  rabbit:
+    build: ./rabbitmq
+    container_name: "rabbit"
+    ports:
+      - 5673:5672
+      - 15673:15672
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
+      RABBITMQ_DEFAULT_USER: "guest"
+      RABBITMQ_DEFAULT_PASS: "guest"
+      RABBITMQ_DEFAULT_VHOST: "/"
 
 volumes:
   postgres_data:
+  mongodb_data_container:

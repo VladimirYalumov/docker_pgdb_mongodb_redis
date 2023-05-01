@@ -7,29 +7,31 @@ services:
     depends_on:
       - postgres
       - redis
+      - rabbit
     networks:
       - network
     volumes:
       - .:/app
     ports:
-      - "8080:8080"
+      - "8080:8080" # REST API
+      - "8081:8081" # сервис по заполнению кэша и поиску событий
+      - "8082:8082" # вебсокеты
 
   postgres:
     image: postgres
     container_name: "postgres"
-    restart: always
     environment:
       POSTGRES_PORT: 5432
       POSTGRES_USER: user
       POSTGRES_PASSWORD: qwerty
       POSTGRES_DB: deewave
       PGDATA: /var/postgres_data
-    networks:
-      - network
     volumes:
       - postgres_data:/var/postgres_data
     ports:
       - "5432:5432"
+    networks:
+      - network
 
   redis:
     image: redis
@@ -37,7 +39,7 @@ services:
     volumes:
       - ./redis.conf:/usr/local/etc/redis/redis.conf
     ports:
-      - "6377:6379"
+      - "6379:6379"
     networks:
       - network
 
@@ -51,15 +53,14 @@ services:
       - 27017:27017
     volumes:
       - mongodb_data_container:/data/db
-    networks:
-      - network
 
   rabbit:
-    build: ./rabbitmq
+    image: rabbitmq:3.10.7-management
+    hostname: rabbitmq
     container_name: "rabbit"
     ports:
-      - 5673:5672
-      - 15673:15672
+      - 5672:5672
+      - 15672:15672
     environment:
       RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
       RABBITMQ_DEFAULT_USER: "guest"
@@ -71,6 +72,7 @@ services:
 volumes:
   postgres_data:
   mongodb_data_container:
+  app:
 
 networks:
   network:

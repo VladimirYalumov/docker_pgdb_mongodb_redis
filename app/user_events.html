@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <title>Chat Example</title>
+  <meta charset="UTF-8">
+  <script type="text/javascript">
+    window.onload = function () {
+      var conn;
+      var log = document.getElementById("log");
+
+      function appendLog(item) {
+        var doScroll = log.scrollTop > log.scrollHeight - log.clientHeight - 1;
+        log.appendChild(item);
+        if (doScroll) {
+          log.scrollTop = log.scrollHeight - log.clientHeight;
+        }
+      }
+
+      document.getElementById("form").onsubmit = function () {
+        if (!conn) {
+          return false;
+        }
+        conn.send('{"token":"user_e48177d2414f2683539fc322abb0d81f6460e971", "message":"user"}');
+        return false;
+      };
+
+      if (window["WebSocket"]) {
+        conn = new WebSocket("ws://127.0.0.1:8082/ws?type=user");
+        conn.onclose = function (evt) {
+          var item = document.createElement("div");
+          item.innerHTML = "<b>Connection closed.</b>";
+          appendLog(item);
+        };
+        conn.onmessage = function (evt) {
+          var messages = evt.data.split('\n');
+          for (var i = 0; i < messages.length; i++) {
+            var item = document.createElement("div");
+            item.innerText = messages[i];
+            appendLog(item);
+          }
+        };
+      } else {
+        var item = document.createElement("div");
+        item.innerHTML = "<b>Your browser does not support WebSockets.</b>";
+        appendLog(item);
+      }
+    };
+  </script>
+  <style type="text/css">
+    html {
+      overflow: hidden;
+    }
+
+    body {
+      overflow: hidden;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      background: gray;
+    }
+
+    #log {
+      background: white;
+      margin: 0;
+      padding: 0.5em 0.5em 0.5em 0.5em;
+      position: absolute;
+      top: 0.5em;
+      left: 0.5em;
+      right: 0.5em;
+      bottom: 3em;
+      overflow: auto;
+    }
+
+    #form {
+      padding: 0 0.5em 0 0.5em;
+      margin: 0;
+      position: absolute;
+      bottom: 1em;
+      left: 0px;
+      width: 100%;
+      overflow: hidden;
+    }
+
+  </style>
+</head>
+<body>
+<div id="log"></div>
+<form id="form">
+  <input type="submit" value="Получить все события определённого пользователя"/>
+</form>
+</body>
+</html>

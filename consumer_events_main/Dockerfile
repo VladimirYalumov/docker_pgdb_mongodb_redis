@@ -9,4 +9,4 @@ COPY search_main /consumer_events_main/search_main
 
 RUN chmod +x /consumer_events_main
 
-CMD ["./consumer_events_main/restapi"]
+CMD ["./consumer_events_main/search_main"]

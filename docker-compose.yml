@@ -34,37 +34,38 @@ services:
       - postgres
       - redis
       - rabbit
+      - events_cache
     networks:
       - network
     volumes:
       - .:/consumer_events_main
-
-  consumer_events_user:
-    container_name: "consumer_events_user"
-    build: ./consumer_events_user/
-    depends_on:
-      - postgres
-      - redis
-      - rabbit
-    networks:
-      - network
-    volumes:
-      - .:/consumer_events_user
-
-
-  ws_events:
-    container_name: "ws_events"
-    build: ./ws_events/
-    depends_on:
-      - postgres
-      - redis
-      - rabbit
-    networks:
-      - network
-    volumes:
-      - .:/ws_events
-    ports:
-      - "8082:8082"
+#
+#  consumer_events_user:
+#    container_name: "consumer_events_user"
+#    build: ./consumer_events_user/
+#    depends_on:
+#      - postgres
+#      - redis
+#      - rabbit
+#    networks:
+#      - network
+#    volumes:
+#      - .:/consumer_events_user
+#
+#
+#  ws_events:
+#    container_name: "ws_events"
+#    build: ./ws_events/
+#    depends_on:
+#      - postgres
+#      - redis
+#      - rabbit
+#    networks:
+#      - network
+#    volumes:
+#      - .:/ws_events
+#    ports:
+#      - "8082:8082"
 
   postgres:
     image: postgres

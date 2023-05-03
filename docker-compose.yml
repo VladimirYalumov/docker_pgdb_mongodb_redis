@@ -1,9 +1,9 @@
 version: '3.7'
 
 services:
-  app:
-    container_name: "app"
-    build: ./app/
+  restapi:
+    container_name: "restapi"
+    build: ./restapi/
     depends_on:
       - postgres
       - redis
@@ -11,11 +11,60 @@ services:
     networks:
       - network
     volumes:
-      - .:/app
+      - .:/restapi
     ports:
-      - "8080:8080" # REST API
-      - "8081:8081" # сервис по заполнению кэша и поиску событий
-      - "8082:8082" # вебсокеты
+      - "8080:8080"
+
+  events_cache:
+    container_name: "events_cache"
+    build: ./events_cache/
+    depends_on:
+      - postgres
+      - redis
+      - rabbit
+    networks:
+      - network
+    volumes:
+      - .:/events_cache
+
+  consumer_events_main:
+    container_name: "consumer_events_main"
+    build: ./consumer_events_main/
+    depends_on:
+      - postgres
+      - redis
+      - rabbit
+    networks:
+      - network
+    volumes:
+      - .:/consumer_events_main
+
+  consumer_events_user:
+    container_name: "consumer_events_user"
+    build: ./consumer_events_user/
+    depends_on:
+      - postgres
+      - redis
+      - rabbit
+    networks:
+      - network
+    volumes:
+      - .:/consumer_events_user
+
+
+  ws_events:
+    container_name: "ws_events"
+    build: ./ws_events/
+    depends_on:
+      - postgres
+      - redis
+      - rabbit
+    networks:
+      - network
+    volumes:
+      - .:/ws_events
+    ports:
+      - "8082:8082"
 
   postgres:
     image: postgres
@@ -39,7 +88,7 @@ services:
     volumes:
       - ./redis.conf:/usr/local/etc/redis/redis.conf
     ports:
-      - "6379:6379"
+      - "6378:6379"
     networks:
       - network
 
@@ -59,8 +108,8 @@ services:
     hostname: rabbitmq
     container_name: "rabbit"
     ports:
-      - 5672:5672
-      - 15672:15672
+      - 5673:5672
+      - 15673:15672
     environment:
       RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
       RABBITMQ_DEFAULT_USER: "guest"

@@ -3,6 +3,7 @@ version: '3.7'
 services:
   restapi:
     container_name: "restapi"
+    restart: always
     build: ./restapi/
     depends_on:
       - postgres
@@ -17,6 +18,7 @@ services:
 
   events_cache:
     container_name: "events_cache"
+    restart: always
     build: ./events_cache/
     depends_on:
       - postgres
@@ -29,6 +31,7 @@ services:
 
   consumer_events_main:
     container_name: "consumer_events_main"
+    restart: always
     build: ./consumer_events_main/
     depends_on:
       - postgres
@@ -39,33 +42,35 @@ services:
       - network
     volumes:
       - .:/consumer_events_main
-#
-#  consumer_events_user:
-#    container_name: "consumer_events_user"
-#    build: ./consumer_events_user/
-#    depends_on:
-#      - postgres
-#      - redis
-#      - rabbit
-#    networks:
-#      - network
-#    volumes:
-#      - .:/consumer_events_user
-#
-#
-#  ws_events:
-#    container_name: "ws_events"
-#    build: ./ws_events/
-#    depends_on:
-#      - postgres
-#      - redis
-#      - rabbit
-#    networks:
-#      - network
-#    volumes:
-#      - .:/ws_events
-#    ports:
-#      - "8082:8082"
+
+  consumer_events_user:
+    container_name: "consumer_events_user"
+    restart: always
+    build: ./consumer_events_user/
+    depends_on:
+      - postgres
+      - redis
+      - rabbit
+      - events_cache
+    networks:
+      - network
+    volumes:
+      - .:/consumer_events_user
+
+
+  ws_events:
+    container_name: "ws_events"
+    build: ./ws_events/
+    depends_on:
+      - postgres
+      - redis
+      - rabbit
+    networks:
+      - network
+    volumes:
+      - .:/ws_events
+    ports:
+      - "8082:8082"
 
   postgres:
     image: postgres

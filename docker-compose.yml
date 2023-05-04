@@ -9,8 +9,6 @@ services:
       - postgres
       - redis
       - rabbit
-    networks:
-      - network
     volumes:
       - .:/restapi
     ports:
@@ -24,8 +22,6 @@ services:
       - postgres
       - redis
       - rabbit
-    networks:
-      - network
     volumes:
       - .:/events_cache
 
@@ -38,8 +34,6 @@ services:
       - redis
       - rabbit
       - events_cache
-    networks:
-      - network
     volumes:
       - .:/consumer_events_main
 
@@ -52,21 +46,17 @@ services:
       - redis
       - rabbit
       - events_cache
-    networks:
-      - network
     volumes:
       - .:/consumer_events_user
 
-
   ws_events:
     container_name: "ws_events"
+    restart: always
     build: ./ws_events/
     depends_on:
       - postgres
       - redis
       - rabbit
-    networks:
-      - network
     volumes:
       - .:/ws_events
     ports:
@@ -85,8 +75,6 @@ services:
       - postgres_data:/var/postgres_data
     ports:
       - "5432:5432"
-    networks:
-      - network
 
   redis:
     image: redis
@@ -95,8 +83,6 @@ services:
       - ./redis.conf:/usr/local/etc/redis/redis.conf
     ports:
       - "6379:6379"
-    networks:
-      - network
 
   mongodb:
     image: mongo:latest
@@ -121,14 +107,8 @@ services:
       RABBITMQ_DEFAULT_USER: "guest"
       RABBITMQ_DEFAULT_PASS: "guest"
       RABBITMQ_DEFAULT_VHOST: "/"
-    networks:
-      - network
 
 volumes:
   postgres_data:
   mongodb_data_container:
-  app:
-
-networks:
-  network:
-    driver: bridge
+  restapi:

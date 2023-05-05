@@ -25,7 +25,7 @@
             };
 
             if (window["WebSocket"]) {
-                conn = new WebSocket("ws://172.10.1.1:8082/ws?guest_token=12345678");
+                conn = new WebSocket("ws://127.0.0.1:8082/ws?guest_token=12345678");
                 conn.onclose = function (evt) {
                     var item = document.createElement("div");
                     item.innerHTML = "<b>Connection closed.</b>";

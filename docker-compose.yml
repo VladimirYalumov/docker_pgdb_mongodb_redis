@@ -35,7 +35,6 @@ services:
       - postgres
       - redis
       - rabbit
-      - events_cache
     volumes:
       - .:/consumer_events_main
 
@@ -47,7 +46,6 @@ services:
       - postgres
       - redis
       - rabbit
-      - events_cache
     volumes:
       - .:/consumer_events_user
 

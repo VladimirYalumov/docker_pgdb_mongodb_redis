@@ -5,8 +5,8 @@ FROM ubuntu
 WORKDIR /consumer_events_main
 
 COPY config.yml /consumer_events_main/config.yml
-COPY search_main /consumer_events_main/search_main
+COPY main_event_consumer /consumer_events_main/main_event_consumer
 
 RUN chmod +x /consumer_events_main
 
-CMD ["./consumer_events_main/search_main"]
+CMD ["./consumer_events_main/main_event_consumer"]

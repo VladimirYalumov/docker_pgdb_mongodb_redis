@@ -18,7 +18,7 @@
         }
       }
 
-      document.getElementById("form").onsubmit = function () {
+      document.getElementById("btn").onclick = function () {
         if (!conn) {
           return false;
         }
@@ -27,7 +27,7 @@
       };
 
       if (window["WebSocket"]) {
-        conn = new WebSocket("ws://172.10.1.1:8082/ws?type=user");
+        conn = new WebSocket("ws://127.0.0.1:8082/ws?type=user");
         conn.onclose = function (evt) {
           var item = document.createElement("div");
           item.innerHTML = "<b>Connection closed.</b>";
@@ -89,7 +89,7 @@
 <body>
 <div id="log"></div>
 <form id="form">
-  <input type="submit" value="Получить все события определённого пользователя"/>
+  <input type="button" id="btn" value="Получить все события определённого пользователя"/>
 </form>
 </body>
 </html>

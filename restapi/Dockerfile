@@ -1,6 +1,7 @@
 FROM ubuntu
 
 #!/bin/bash
+RUN apt-get update && apt-get install
 
 WORKDIR /restapi
 

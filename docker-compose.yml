@@ -24,6 +24,8 @@ services:
       - rabbit
     volumes:
       - .:/events_cache
+    ports:
+      - "8081:8081"
 
   consumer_events_main:
     container_name: "consumer_events_main"

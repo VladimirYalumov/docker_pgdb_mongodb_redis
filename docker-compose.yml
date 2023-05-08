@@ -63,16 +63,16 @@ services:
       - "8082:8082"
 
   postgres:
-    image: postgres
+    image: postgres:14.2-alpine
     container_name: "postgres"
     environment:
       POSTGRES_PORT: 5432
       POSTGRES_USER: user
       POSTGRES_PASSWORD: qwerty
       POSTGRES_DB: deewave
-      PGDATA: /var/postgres_data
+      PGDATA: /var/potstgres/postgres_data
     volumes:
-      - postgres_data:/var/postgres_data
+      - .:/var/potstgres/
     ports:
       - "5432:5432"
 
@@ -111,4 +111,3 @@ services:
 volumes:
   postgres_data:
   mongodb_data_container:
-  restapi:

@@ -18,16 +18,16 @@
         }
       }
 
-      document.getElementById("btn").onclick = function () {
+      document.getElementById("form").onsubmit = function () {
         if (!conn) {
           return false;
         }
-        conn.send('{"token":"user_e48177d2414f2683539fc322abb0d81f6460e971", "message":"user"}');
+        conn.send('{"token":"26384898369f75dd004ac96b9879b28400", "message":"user"}');
         return false;
       };
 
       if (window["WebSocket"]) {
-        conn = new WebSocket("ws://127.0.0.1:8082/ws?type=user");
+        conn = new WebSocket("ws://127.0.0.1:8082/ws?type=user&token=26384898369f75dd004ac96b9879b28400");
         conn.onclose = function (evt) {
           var item = document.createElement("div");
           item.innerHTML = "<b>Connection closed.</b>";
@@ -89,7 +89,7 @@
 <body>
 <div id="log"></div>
 <form id="form">
-  <input type="button" id="btn" value="Получить все события определённого пользователя"/>
+  <input type="submit" value="Получить все события определённого пользователя"/>
 </form>
 </body>
 </html>

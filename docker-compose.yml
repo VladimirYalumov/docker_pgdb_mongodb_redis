@@ -48,6 +48,17 @@ services:
     volumes:
       - .:/consumer_events_main
 
+  consumer_events_subs:
+    container_name: "consumer_events_subs"
+    restart: always
+    build: ./consumer_events_subs/
+    depends_on:
+      - postgres
+      - redis
+      - rabbit
+    volumes:
+      - .:/consumer_events_subs
+
   consumer_events_user:
     container_name: "consumer_events_user"
     restart: always

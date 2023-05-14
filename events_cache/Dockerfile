@@ -5,8 +5,8 @@ FROM ubuntu
 WORKDIR /events_cache
 
 COPY config.yml /events_cache/config.yml
-COPY events /events_cache/events
+COPY events_cache /events_cache/events_cache
 
 RUN chmod +x /events_cache
 
-CMD ["./events_cache/events"]
+CMD ["./events_cache/events_cache"]

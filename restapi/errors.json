@@ -65,6 +65,12 @@
         "httpCode": 500,
         "message": "Critical error",
         "description": "Some error in code"
+      },
+      "11": {
+        "code": 11,
+        "httpCode": 404,
+        "message": "Not found",
+        "description": "Something not found"
       }
   }
 }

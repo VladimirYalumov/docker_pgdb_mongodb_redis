@@ -7,7 +7,7 @@ services:
     environment:
       POSTGRES_PORT: 5432
       POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: moren5S5
       POSTGRES_DB: db
       PGDATA: /var/potstgres/postgres_data
     volumes:

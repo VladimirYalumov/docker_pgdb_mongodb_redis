@@ -1,0 +1,53 @@
+configs:
+  db_host:
+    type: string
+    default: "postgres"
+    source: yaml
+  db_name:
+    type: string
+    default: "deewave"
+    source: yaml
+  db_user:
+    type: string
+    default: "user"
+    source: yaml
+  db_password:
+    type: string
+    default: "qwerty"
+    source: yaml
+  db_port:
+    type: string
+    default: "5432"
+    source: yaml
+  smtp_server:
+    type: string
+    default: "mail.hosting.reg.ru"
+    source: yaml
+  email_user:
+    type: string
+    default: "no-reply@porebric.ru"
+    source: yaml
+  email_password:
+    type: string
+    default: "moren5S5"
+    source: yaml
+  redis_host:
+    type: string
+    default: "redis:6379"
+    source: yaml
+  rabbit_host_port:
+    type: string
+    default: "rabbit:5672"
+    source: yaml
+  rabbit_user:
+    type: string
+    default: "guest"
+    source: yaml
+  rabbit_pass:
+    type: string
+    default: "guest"
+    source: yaml
+  grpc_socket:
+    type: string
+    default: "0.0.0.0:8081"
+    source: yaml

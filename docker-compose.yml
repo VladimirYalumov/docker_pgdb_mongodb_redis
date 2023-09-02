@@ -1,96 +1,14 @@
 version: '3.7'
 
 services:
-  restapi:
-    container_name: "restapi"
-    restart: always
-    build: ./restapi/
-    depends_on:
-      - postgres
-      - redis
-      - rabbit
-    volumes:
-      - .:/restapi
-    ports:
-      - "8080:8080"
-
-  migrations:
-    container_name: "migrations"
-    build: ./migrations/
-    depends_on:
-      - postgres
-      - redis
-      - rabbit
-    volumes:
-      - .:/migrations
-
-  events_cache:
-    container_name: "events_cache"
-    restart: always
-    build: ./events_cache/
-    depends_on:
-      - postgres
-      - redis
-      - rabbit
-    volumes:
-      - .:/events_cache
-    ports:
-      - "8081:8081"
-
-  consumer_events_main:
-    container_name: "consumer_events_main"
-    restart: always
-    build: ./consumer_events_main/
-    depends_on:
-      - postgres
-      - redis
-      - rabbit
-    volumes:
-      - .:/consumer_events_main
-
-  consumer_events_subs:
-    container_name: "consumer_events_subs"
-    restart: always
-    build: ./consumer_events_subs/
-    depends_on:
-      - postgres
-      - redis
-      - rabbit
-    volumes:
-      - .:/consumer_events_subs
-
-  consumer_events_user:
-    container_name: "consumer_events_user"
-    restart: always
-    build: ./consumer_events_user/
-    depends_on:
-      - postgres
-      - redis
-      - rabbit
-    volumes:
-      - .:/consumer_events_user
-
-  ws_events:
-    container_name: "ws_events"
-    restart: always
-    build: ./ws_events/
-    depends_on:
-      - postgres
-      - redis
-      - rabbit
-    volumes:
-      - .:/ws_events
-    ports:
-      - "8082:8082"
-
   postgres:
     image: postgres:14.2-alpine
     container_name: "postgres"
     environment:
       POSTGRES_PORT: 5432
       POSTGRES_USER: user
-      POSTGRES_PASSWORD: qwerty
-      POSTGRES_DB: deewave
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: db
       PGDATA: /var/potstgres/postgres_data
     volumes:
       - .:/var/potstgres/
@@ -105,17 +23,6 @@ services:
     ports:
       - "6379:6379"
 
-  mongodb:
-    image: mongo:latest
-    container_name: "mongodb"
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: rootpassword
-    ports:
-      - 27017:27017
-    volumes:
-      - mongodb_data_container:/data/db
-
   rabbit:
     image: rabbitmq:3.10.7-management
     hostname: rabbitmq
@@ -129,6 +36,35 @@ services:
       RABBITMQ_DEFAULT_PASS: "guest"
       RABBITMQ_DEFAULT_VHOST: "/"
 
+  jaeger:
+    image: jaegertracing/all-in-one:1.45
+    environment:
+      COLLECTOR_OTLP_ENABLED: true
+      SPAN_STORAGE_TYPE: badger
+      BADGER_EPHEMERAL: false
+      BADGER_DIRECTORY_VALUE: /badger/data
+      BADGER_DIRECTORY_KEY: /badger/key
+    volumes:
+      - ./badger:/badger
+    ports:
+      - "16686:16686"
+      - "4317:4317"
+
+#  events:
+#    container_name: events_service
+#    image: vladimirylmv/events:latest
+#    restart: always
+#    volumes:
+#      - ./events/logs:/app/logs
+#      - ./events/config:/app/config
+#    env_file:
+#      - .env
+#    ports:
+#      - 8080:8080
+#    depends_on:
+#      - postgres
+#      - redis
+#      - rabbit
+
 volumes:
   postgres_data:
-  mongodb_data_container:

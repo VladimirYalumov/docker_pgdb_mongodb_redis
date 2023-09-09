@@ -50,6 +50,36 @@ services:
       - "16686:16686"
       - "4317:4317"
 
+  events:
+    container_name: events_service
+    image: vladimirylmv/events:latest
+    restart: always
+    volumes:
+      -  ~/services/events/config:/app/config
+    env_file:
+      - .env
+    ports:
+      - 8081:8081
+    depends_on:
+      - postgres
+      - redis
+      - rabbit
+
+  restapi:
+    container_name: restapi_service
+    image: vladimirylmv/restapi:latest
+    restart: always
+    volumes:
+      - ~/services/restapi/config:/app/config
+    env_file:
+      - .env
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres
+      - redis
+      - rabbit
+
   user_bot:
     container_name: user_bot_service
     image: vladimirylmv/user_bot:latest

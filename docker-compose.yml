@@ -50,6 +50,21 @@ services:
       - "16686:16686"
       - "4317:4317"
 
+  ws:
+    container_name: ws_service
+    image: vladimirylmv/ws:latest
+    restart: always
+    volumes:
+      - ~/services/ws/config:/app/config
+    env_file:
+      - .env
+    ports:
+      - 8082:8082
+    depends_on:
+      - postgres
+      - redis
+      - rabbit
+
   events:
     container_name: events_service
     image: vladimirylmv/events:latest
